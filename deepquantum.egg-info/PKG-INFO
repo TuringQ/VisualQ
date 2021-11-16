@@ -1,0 +1,19 @@
+Metadata-Version: 1.2
+Name: deepquantum
+Version: 1.4.3
+Summary: a Quantum computation Framework.
+Home-page: UNKNOWN
+Author: Turing Quantum
+Author-email: 
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Microsoft
+Classifier: Operating System :: Unix
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.6
