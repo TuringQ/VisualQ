@@ -15,8 +15,8 @@ __all__ = [
     "ptrace",
     "partial_trace",
     "measure_state",
-    # "expecval_ZI",
-    # "measure",
+    "expecval_ZI",
+    "measure",
     "get_fidelity",
     "get_trace_distance"
 ]
@@ -185,25 +185,25 @@ def measure_state(state, M, rho=False, physic=False):
         return torch.trace(state @ M).real
 
 
-# def expecval_ZI(rho, nqubit, target):
-#     """
-#     rho为nqubit大小的密度矩阵，target为z门放置位置
-#     """
-#     zgate = z_gate()
-#     H = gate_expand_1toN(zgate, nqubit, target)
-#     expecval = (rho @ H).trace()  # [-1,1]
-#     expecval_real = (expecval.real + 1) / 2  # [0,1]
-#     return expecval_real
-#
-#
-# def measure(rho, nqubit):
-#     """
-#     测量nqubit次期望
-#     """
-#     measure = torch.zeros(nqubit, 1)
-#     for i in range(nqubit):
-#         measure[i] = expecval_ZI(rho, nqubit, list(range(nqubit))[i])
-#     return measure
+def expecval_ZI(rho, nqubit, target):
+    """
+    rho为nqubit大小的密度矩阵，target为z门放置位置
+    """
+    zgate = z_gate()
+    H = gate_expand_1toN(zgate, nqubit, target)
+    expecval = (rho @ H).trace()  # [-1,1]
+    expecval_real = (expecval.real + 1) / 2  # [0,1]
+    return expecval_real
+
+
+def measure(rho, nqubit):
+    """
+    测量nqubit次期望
+    """
+    measure = torch.zeros(nqubit, 1)
+    for i in range(nqubit):
+        measure[i] = expecval_ZI(rho, nqubit, list(range(nqubit))[i])
+    return measure
 
 
 def get_fidelity(true_sp, gen_sp, flag=1):

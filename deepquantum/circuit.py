@@ -12,6 +12,11 @@ class Circuit(object):
         self.u = []    # 顺序保存酉矩阵
         self.M_lst = []  # 保存测量算子矩阵
 
+        #线路的初始态，默认全为|0>态
+        self.state_init = torch.zeros(2**self.nqubits)
+        self.state_init[0] = 1
+        self.state_init = self.state_init + 0j
+
 #   内置函数 添加分拆资源
     def _add_gate(self, gate_name: str, target_qubit, gate_params):
         """add gate and its feature to the circuit by sequence.
@@ -178,6 +183,25 @@ class Circuit(object):
 
     def multi_control_cnot(self, control_lst, target):
         self._add_u(multi_control_gate(x_gate(), self.n_qubits, control_lst, target))
+
+    def swap(self, target_qubit01, target_qubit02):
+        self.cnot(target_qubit01, target_qubit02)
+        self.cnot(target_qubit02, target_qubit01)
+        self.cnot(target_qubit01, target_qubit02)
+
+    def cswap(self, control_qubit, target_qubit01, target_qubit02):
+        zero_zero = torch.tensor([[1, 0], [0, 0]]) + 0j
+        one_one = torch.tensor([[0, 0], [0, 1]]) + 0j
+
+        lst = [torch.eye(2, 2)] * self.n_qubits
+        lst[control_qubit] = zero_zero
+
+        swap = two_qubit_control_gate(x_gate(), self.n_qubits, target_qubit01, target_qubit02)
+        swap = swap @ two_qubit_control_gate(x_gate(), self.n_qubits, target_qubit02, target_qubit01)
+        swap = swap @ two_qubit_control_gate(x_gate(), self.n_qubits, target_qubit01, target_qubit02)
+
+        self._add_gate('cswap', control_qubit, [target_qubit01, target_qubit02])
+        self._add_u(multi_kron(lst) + swap @ gate_expand_1toN(one_one, self.n_qubits, control_qubit))
 
     def get(self):
         self.U = gate_sequence_product(self.u, self.n_qubits)

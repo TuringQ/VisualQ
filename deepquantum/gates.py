@@ -17,6 +17,9 @@ __all__ = ["I",
            "gate_sequence_product",
            ]
 
+# CNOT=|0⟩⟨0|⊗I+|1⟩⟨1|⊗X
+# CNOT |0⟩⟨0|、|1⟩⟨1|在控制位  X在受控位
+# gate_control(x_gate(), N, control, target)
 
 #   内置函数
 def I():
