@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: deepquantum
+Version: 0.0.2
+Summary: IR for quantum computation.
+Home-page: UNKNOWN
+Author: TuringQ
+Author-email: 
+License: MIT
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Microsoft
+Classifier: Operating System :: Unix
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.6
+License-File: LICENSE
+
+UNKNOWN
+

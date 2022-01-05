@@ -1,0 +1,4 @@
+torch>=1.10.0
+numpy>=1.14.0
+scipy>=1.7.3
+typing>=3.5.0
